@@ -5,53 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Manu Polo | Sales Operations Portfolio</title>
 
+  <!-- Clean modern font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg: #0b0b0b;
+      --panel: #111111;
+      --border: #1f1f1f;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.65);
+      --faint: rgba(255,255,255,0.4);
+    }
+
     body {
       margin: 0;
-      background: #0b0b0b;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     header {
-      padding: 20px 40px;
-      font-size: 14px;
-      letter-spacing: 2px;
+      padding: 24px 40px;
+      font-size: 12px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      opacity: 0.7;
+      color: var(--faint);
+      border-bottom: 1px solid var(--border);
     }
 
     .layout {
       display: flex;
-      gap: 20px;
-      padding: 20px 40px;
+      gap: 28px;
+      padding: 28px 40px;
       align-items: flex-start;
     }
 
     /* LEFT PANEL */
     .left-panel {
       width: 30%;
-      min-width: 250px;
-      font-size: 14px;
-      line-height: 1.6;
-      opacity: 0.85;
+      min-width: 260px;
+      padding-right: 10px;
     }
 
     .left-panel h3 {
-      margin-top: 0;
-      font-size: 12px;
+      margin: 0 0 12px 0;
+      font-size: 11px;
       letter-spacing: 2px;
-      opacity: 0.6;
       text-transform: uppercase;
+      color: var(--faint);
     }
 
-    /* CENTER VIDEO */
+    .left-panel p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* CENTER VIDEO (UNCHANGED SIZE LOGIC) */
     .video-box {
       width: 100%;
       max-width: 900px;
       aspect-ratio: 16 / 9;
       background: black;
       flex: 1;
+
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
     iframe, img {
@@ -61,10 +85,10 @@
       object-fit: cover;
     }
 
-    /* RIGHT/MENU BELOW ON MOBILE */
+    /* RIGHT PANEL */
     .right-panel {
-      width: 25%;
-      min-width: 200px;
+      width: 24%;
+      min-width: 220px;
     }
 
     .menu {
@@ -74,18 +98,28 @@
     }
 
     .menu button {
-      background: none;
-      border: 1px solid #333;
-      color: white;
-      padding: 10px 12px;
+      background: linear-gradient(180deg, #121212, #0e0e0e);
+      border: 1px solid var(--border);
+      color: var(--muted);
+
+      padding: 12px 14px;
       cursor: pointer;
+
       font-size: 12px;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       text-align: left;
+
+      transition: all 0.2s ease;
     }
 
     .menu button:hover {
-      border-color: white;
+      border-color: rgba(255,255,255,0.35);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .menu button:active {
+      transform: translateY(0px);
     }
 
     /* MOBILE */
@@ -109,13 +143,15 @@
 
 <div class="layout">
 
-  <!-- LEFT PANEL (DESCRIPTION) -->
+  <!-- LEFT PANEL -->
   <div class="left-panel" id="info">
     <h3>Use Case</h3>
-    Click a project to explore a Salesforce Sales Operations process.
+    <p>
+      Click a project to explore a Salesforce Sales Operations process.
+    </p>
   </div>
 
-  <!-- CENTER VIDEO -->
+  <!-- CENTER VIDEO (UNCHANGED SIZE) -->
   <div class="video-box" id="videoBox">
     <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" />
   </div>
@@ -127,7 +163,7 @@
       <button onclick="changeCase(
         'dQw4w9WgXcQ',
         'Opportunity Sales Process Enforcement',
-        'Designed a structured Opportunity lifecycle aligned with sales methodology. Each stage requires mandatory fields such as qualification data, business needs, and decision criteria. Validation rules prevent progression until data completeness is achieved.'
+        'Structured Opportunity lifecycle aligned with sales methodology. Each stage requires mandatory fields (qualification, business needs, decision criteria). Validation rules prevent progression without data completeness.'
       )">
         Opportunity Process
       </button>
@@ -143,7 +179,7 @@
       <button onclick="changeCase(
         'dQw4w9WgXcQ',
         'Dashboard Security Model',
-        'Implemented role-based dashboard visibility to ensure data segmentation by region and hierarchy.'
+        'Role-based dashboard visibility ensuring segmentation across regions and reporting structures.'
       )">
         Dashboards
       </button>
@@ -151,7 +187,7 @@
       <button onclick="changeCase(
         'dQw4w9WgXcQ',
         'CRM Data Quality Framework',
-        'Introduced validation rules and required fields strategy to improve CRM data accuracy and reporting reliability.'
+        'Validation rules and required field strategy improving CRM accuracy and forecasting reliability.'
       )">
         Data Quality
       </button>
@@ -164,7 +200,6 @@
 <script>
 function changeCase(videoId, title, description) {
 
-  // Replace GIF with video
   const box = document.getElementById("videoBox");
 
   box.innerHTML =
@@ -172,7 +207,6 @@ function changeCase(videoId, title, description) {
     videoId +
     '?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
 
-  // Update LEFT panel description
   document.getElementById("info").innerHTML = `
     <h3>${title}</h3>
     <p>${description}</p>
