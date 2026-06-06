@@ -21,19 +21,37 @@
       opacity: 0.7;
     }
 
-    .container {
+    .layout {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      gap: 20px;
+      padding: 20px 40px;
+      align-items: flex-start;
     }
 
+    /* LEFT PANEL */
+    .left-panel {
+      width: 30%;
+      min-width: 250px;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    .left-panel h3 {
+      margin-top: 0;
+      font-size: 12px;
+      letter-spacing: 2px;
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+
+    /* CENTER VIDEO */
     .video-box {
-      width: 80%;
+      width: 100%;
       max-width: 900px;
       aspect-ratio: 16 / 9;
       background: black;
-      margin-top: 20px;
+      flex: 1;
     }
 
     iframe, img {
@@ -43,35 +61,42 @@
       object-fit: cover;
     }
 
+    /* RIGHT/MENU BELOW ON MOBILE */
+    .right-panel {
+      width: 25%;
+      min-width: 200px;
+    }
+
     .menu {
-      margin-top: 30px;
       display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .menu button {
       background: none;
       border: 1px solid #333;
       color: white;
-      padding: 10px 14px;
+      padding: 10px 12px;
       cursor: pointer;
       font-size: 12px;
       letter-spacing: 1px;
+      text-align: left;
     }
 
     .menu button:hover {
       border-color: white;
     }
 
-    .info {
-      max-width: 900px;
-      margin-top: 30px;
-      font-size: 14px;
-      line-height: 1.6;
-      opacity: 0.85;
-      text-align: center;
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .left-panel, .right-panel {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -82,51 +107,64 @@
   MANU POLO — SALES OPERATIONS PORTFOLIO
 </header>
 
-<div class="container">
+<div class="layout">
 
-  <!-- INITIAL STATE: SALESFORCE GIF -->
+  <!-- LEFT PANEL (DESCRIPTION) -->
+  <div class="left-panel" id="info">
+    <h3>Use Case</h3>
+    Click a project to explore a Salesforce Sales Operations process.
+  </div>
+
+  <!-- CENTER VIDEO -->
   <div class="video-box" id="videoBox">
     <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" />
   </div>
 
-  <!-- MENU -->
-  <div class="menu">
+  <!-- RIGHT MENU -->
+  <div class="right-panel">
+    <div class="menu">
 
-    <button onclick="changeVideo('dQw4w9WgXcQ',
-      'Approval Process Automation',
-      'Reduced approval time from 2 days to 30 minutes using Salesforce approval workflows.')">
-      Approval Process
-    </button>
+      <button onclick="changeCase(
+        'dQw4w9WgXcQ',
+        'Opportunity Sales Process Enforcement',
+        'Designed a structured Opportunity lifecycle aligned with sales methodology. Each stage requires mandatory fields such as qualification data, business needs, and decision criteria. Validation rules prevent progression until data completeness is achieved.'
+      )">
+        Opportunity Process
+      </button>
 
-    <button onclick="changeVideo('dQw4w9WgXcQ',
-      'Lead Routing Flow',
-      'Automated lead assignment using Salesforce Flow and territory rules.')">
-      Lead Routing
-    </button>
+      <button onclick="changeCase(
+        'dQw4w9WgXcQ',
+        'Lead Routing Automation',
+        'Automated lead assignment using Salesforce Flow based on territory, industry, and workload balancing.'
+      )">
+        Lead Routing
+      </button>
 
-    <button onclick="changeVideo('dQw4w9WgXcQ',
-      'Dashboard Security',
-      'Implemented role-based dashboard visibility across regions.')">
-      Dashboards
-    </button>
+      <button onclick="changeCase(
+        'dQw4w9WgXcQ',
+        'Dashboard Security Model',
+        'Implemented role-based dashboard visibility to ensure data segmentation by region and hierarchy.'
+      )">
+        Dashboards
+      </button>
 
-    <button onclick="changeVideo('dQw4w9WgXcQ',
-      'Data Quality Rules',
-      'Improved CRM data quality using validation rules and automation.')">
-      Data Quality
-    </button>
+      <button onclick="changeCase(
+        'dQw4w9WgXcQ',
+        'CRM Data Quality Framework',
+        'Introduced validation rules and required fields strategy to improve CRM data accuracy and reporting reliability.'
+      )">
+        Data Quality
+      </button>
 
-  </div>
-
-  <!-- DESCRIPTION -->
-  <div class="info" id="info">
-    Click a project above to explore a Sales Operations use case.
+    </div>
   </div>
 
 </div>
 
 <script>
-function changeVideo(videoId, title, description) {
+function changeCase(videoId, title, description) {
+
+  // Replace GIF with video
   const box = document.getElementById("videoBox");
 
   box.innerHTML =
@@ -134,8 +172,11 @@ function changeVideo(videoId, title, description) {
     videoId +
     '?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
 
-  document.getElementById("info").innerHTML =
-    "<strong>" + title + "</strong><br><br>" + description;
+  // Update LEFT panel description
+  document.getElementById("info").innerHTML = `
+    <h3>${title}</h3>
+    <p>${description}</p>
+  `;
 }
 </script>
 
