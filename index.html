@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Manu Polo | Sales Operations</title>
+  <title>Manu Polo | Sales Operations Portfolio</title>
 
   <style>
     body {
@@ -36,10 +36,11 @@
       margin-top: 20px;
     }
 
-    iframe {
+    iframe, img {
       width: 100%;
       height: 100%;
       border: none;
+      object-fit: cover;
     }
 
     .menu {
@@ -70,6 +71,7 @@
       font-size: 14px;
       line-height: 1.6;
       opacity: 0.85;
+      text-align: center;
     }
   </style>
 </head>
@@ -82,31 +84,41 @@
 
 <div class="container">
 
-  <div class="video-box">
-    <iframe id="video"
-      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-      allowfullscreen>
-    </iframe>
+  <!-- INITIAL STATE: SALESFORCE GIF -->
+  <div class="video-box" id="videoBox">
+    <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" />
   </div>
 
+  <!-- MENU -->
   <div class="menu">
-    <button onclick="changeVideo('dQw4w9WgXcQ', 'Approval Process Automation', 'Reduced approval time from 2 days to 30 minutes.')">
+
+    <button onclick="changeVideo('dQw4w9WgXcQ',
+      'Approval Process Automation',
+      'Reduced approval time from 2 days to 30 minutes using Salesforce approval workflows.')">
       Approval Process
     </button>
 
-    <button onclick="changeVideo('dQw4w9WgXcQ', 'Lead Routing Flow', 'Automated lead assignment using Salesforce Flow.')">
+    <button onclick="changeVideo('dQw4w9WgXcQ',
+      'Lead Routing Flow',
+      'Automated lead assignment using Salesforce Flow and territory rules.')">
       Lead Routing
     </button>
 
-    <button onclick="changeVideo('dQw4w9WgXcQ', 'Dashboard Security', 'Implemented role-based dashboard visibility.')">
+    <button onclick="changeVideo('dQw4w9WgXcQ',
+      'Dashboard Security',
+      'Implemented role-based dashboard visibility across regions.')">
       Dashboards
     </button>
 
-    <button onclick="changeVideo('dQw4w9WgXcQ', 'Data Quality Rules', 'Improved CRM data accuracy with validation rules.')">
+    <button onclick="changeVideo('dQw4w9WgXcQ',
+      'Data Quality Rules',
+      'Improved CRM data quality using validation rules and automation.')">
       Data Quality
     </button>
+
   </div>
 
+  <!-- DESCRIPTION -->
   <div class="info" id="info">
     Click a project above to explore a Sales Operations use case.
   </div>
@@ -115,8 +127,12 @@
 
 <script>
 function changeVideo(videoId, title, description) {
-  document.getElementById("video").src =
-    "https://www.youtube.com/embed/" + videoId;
+  const box = document.getElementById("videoBox");
+
+  box.innerHTML =
+    '<iframe src="https://www.youtube.com/embed/' +
+    videoId +
+    '?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
 
   document.getElementById("info").innerHTML =
     "<strong>" + title + "</strong><br><br>" + description;
